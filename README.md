@@ -1,4 +1,4 @@
-﻿# 🧮 MiniLang Interpreter
+﻿# 🧮 Simple Mathematical Expression Interpreter in C#
 
 <div align="center">
 
@@ -84,13 +84,13 @@ Traverses the Abstract Syntax Tree (AST) recursively to compute the final result
 1. Clone the repository:
 
    ```bash
-   git clone [https://github.com/your-username/MiniLang-Interpreter.git](https://github.com/your-username/MiniLang-Interpreter.git)
+   git clone [https://github.com/Ammar-Yasser8/compiler.git](https://github.com/Ammar-Yasser8/compiler.git)
    ```
 
 2. Navigate to the project folder:
 
    ```bash
-   cd MiniLang-Interpreter
+   cd compiler
    ```
 
 3. Run the project:
@@ -117,31 +117,9 @@ Result: 30
 Result: 100
 ```
 
-## 📂 Project Structure
-
-```
-MiniLang-Interpreter/
-├── Program.cs          # Main entry point
-├── Models/
-│   ├── Token.cs        # Token definitions
-│   └── AstNodes.cs     # Abstract Syntax Tree node classes
-├── Core/
-│   ├── Lexer.cs        # Tokenization logic
-│   ├── Parser.cs       # AST construction logic
-│   └── Evaluator.cs    # Tree traversal and calculation
-└── README.md
-```
-
 ## 🔮 Future Roadmap
 
 - [ ] Add support for Variables (e.g., x = 10).
 - [ ] Add support for Floating point numbers (double).
 - [ ] Add power operator (^).
 
-## 🤝 Contributing
-
-Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
-
-## 📄 License
-
-This project is open source and available under the MIT License.
