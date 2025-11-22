@@ -12,7 +12,7 @@ namespace Compiler
         Minus,
         Multiply,
         Divide,
-        LParen,
+        LParen, 
         RParen,
         EOF // End of File
     }
