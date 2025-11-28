@@ -90,6 +90,59 @@ Enter mathematical expressions in the text area and click **Run Compiler**.
 
 The result will display the calculated value and the type of the root AST node (e.g., `BinaryExpressionNode`, `NumberNode`).
 
+## 🧪 Test Cases
+
+### Category A: The Basics (Sanity Checks)
+*Goal: Ensure basic symbols work.*
+
+| Input | Expected Result | Why? |
+|-------|-----------------|------|
+| `1 + 2` | `3` | Basic Addition |
+| `10 - 4` | `6` | Basic Subtraction |
+| `5 * 6` | `30` | Basic Multiplication |
+| `20 / 4` | `5` | Basic Division |
+| `0 + 5` | `5` | Zero handling |
+
+### Category B: Order of Operations (The Real Test)
+*Goal: Ensure the Parser tree is built correctly (Precedence).*
+
+| Input | Expected Result | Why? |
+|-------|-----------------|------|
+| `2 + 3 * 4` | `14` | 3*4 (12) happens first, then + 2. If logic is wrong, it gives 20. |
+| `10 - 2 * 3` | `4` | 2*3 (6) happens first. 10 - 6 = 4. |
+| `10 * 2 + 5` | `25` | Multiplication is on the left, but still high priority. |
+| `2 * 3 + 4 * 5` | `26` | (2*3) + (4*5) -> 6 + 20. |
+| `10 + 20 / 2` | `20` | Division happens before addition. |
+
+### Category C: Parentheses (Grouping)
+*Goal: Ensure ParseFactor handles recursion correctly.*
+
+| Input | Expected Result | Why? |
+|-------|-----------------|------|
+| `(2 + 3) * 4` | `20` | Parentheses force 2+3 (5) to happen first. 5 * 4. |
+| `10 * (5 - 2)` | `30` | 5-2 is 3. 10 * 3. |
+| `((2 + 3) * 5)` | `25` | Nested parentheses. 5 * 5. |
+| `(5 + 5) / (1 + 1)` | `5` | 10 / 2. |
+
+### Category D: Integer Logic & Formatting
+*Goal: Test C# Integer limits and formatting.*
+
+| Input | Expected Result | Why? |
+|-------|-----------------|------|
+| `5 / 2` | `2` | Since we used int, decimals are truncated. |
+| `100 + 5` | `105` | Testing whitespace handling. |
+| `123` | `123` | Single number expression. |
+
+### Category E: Error Handling (What breaks it?)
+*Goal: Ensure your try-catch block works.*
+
+| Input | Expected Result | Why? |
+|-------|-----------------|------|
+| `10 +` | Error | Unexpected End of File (Parser expected a number after +). |
+| `10 + a` | Error | Unknown Character (Lexer doesn't know 'a'). |
+| `(10 + 5` | Error | Missing closing parenthesis `)`. |
+| `10 / 0` | Error | Divide by Zero exception (C# runtime error). |
+
 ## 🔮 Future Roadmap
 
 - [ ] Add support for Variables (e.g., `let x = 10`).
