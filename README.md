@@ -1,15 +1,15 @@
-﻿# 🧮 Simple Mathematical Expression Interpreter in C#
+﻿# 🧮 MiniLang Web Compiler
 
 <div align="center">
 
-![.NET](https://img.shields.io/badge/.NET-10-blue?style=for-the-badge&logo=dotnet)
+![.NET](https://img.shields.io/badge/.NET-8.0-purple?style=for-the-badge&logo=dotnet)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-MVC-blue?style=for-the-badge&logo=dotnet)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Build](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge)
 
-*A handcrafted mathematical expression interpreter built from scratch to explore compiler design fundamentals*
+*A modern, web-based mathematical expression interpreter built with ASP.NET Core MVC.*
 
-[🚀 Quick Start](#-getting-started) • [📖 Documentation](#-architecture) • [🎯 Examples](#-usage-examples) • [🤝 Contributing](#-contributing)
+[🚀 Quick Start](#-getting-started) • [📖 Documentation](#-architecture) • [✨ Features](#-features) • [🤝 Contributing](#-contributing)
 
 </div>
 
@@ -17,109 +17,83 @@
 
 ## 📋 Overview
 
-**MiniLang Interpreter** is a lightweight, educational compiler and interpreter designed to evaluate mathematical expressions. Built entirely in C# without external parsing libraries, it demonstrates the core phases of compiler construction through clean, understandable code.
+**MiniLang Web Compiler** is a robust mathematical expression evaluator wrapped in a premium web interface. It demonstrates core compiler design principles (Lexing, Parsing, Evaluation) within a modern ASP.NET Core MVC application.
 
 ### Why MiniLang?
 
-- **Educational Focus**: Perfect for learning compiler design principles
-- **Zero Dependencies**: Pure C# implementation with no external parsing libraries
-- **Clean Architecture**: Clear separation of lexical analysis, parsing, and evaluation
-- **Production Patterns**: Implements industry-standard compiler techniques
+- **Web-Based Interface**: Clean, responsive UI with light/dark mode support.
+- **Visual Feedback**: Real-time evaluation with result type information.
+- **Educational Core**: Pure C# implementation of a recursive descent parser.
+- **Modern Stack**: Built on .NET 8 and ASP.NET Core MVC.
 
 ## ✨ Features
 
 | Feature | Description |
 |---------|-------------|
+| 🌐 **Web Interface** | Premium UI with glassmorphism effects and responsive design |
 | 🔤 **Tokenization** | Converts raw input into structured tokens |
 | 🌳 **AST Generation** | Builds Abstract Syntax Trees using recursive descent parsing |
 | ⚖️ **Operator Precedence** | Correctly handles mathematical order of operations |
-| 🔗 **Parentheses Support** | Full support for nested expressions and grouping |
 | 🛡️ **Error Handling** | Comprehensive syntax error detection and reporting |
-| 🎯 **Type Safety** | Strong typing throughout the compilation pipeline |
+| 📊 **Type Inspection** | Displays the underlying AST node type for the result |
 
 ## 🏗️ Architecture
 
-The interpreter follows the classical compiler pipeline architecture:
+The application follows a clean separation of concerns:
 
-graph LR
-    A[Input Source] -->|Text| B(Lexer)
-    B -->|Tokens| C(Parser)
-    C -->|AST| D(Evaluator)
-    D -->|Result| E[Output]
+### Compiler Core
+1. **Lexer**: Scans input string -> Tokens
+2. **Parser**: Tokens -> Abstract Syntax Tree (AST)
+3. **Evaluator**: AST -> Result (int)
 
-
-1. Lexer (Tokenizer)
-
-Scans the input string character by character and groups them into Tokens.
-
-Input: 10 + 5
-
-Output: [Number(10), Plus, Number(5), EOF]
-
-2. Parser (Syntax Analysis)
-
-Uses Recursive Descent Parsing to organize tokens into a tree structure (AST) based on grammar rules. It handles operator precedence by separating logic into ParseExpression (lowest priority) and ParseTerm (highest priority).
-
-Structure:
-
-Expression: Handles +, -
-
-Term: Handles *, /
-
-Factor: Handles Numbers, ( )
-
-3. Evaluator
-
-Traverses the Abstract Syntax Tree (AST) recursively to compute the final result.
+### Web Layer (MVC)
+- **Controller**: Handles HTTP requests and orchestrates the compilation process.
+- **Views**: Renders the UI using Razor syntax and modern CSS.
+- **Models**: Transfers data (Input, Output, ResultType, Errors) between Controller and Views.
 
 ## 💻 Getting Started
 
 ### Prerequisites
 
-- .NET SDK (6.0 or later)
-- Visual Studio or VS Code
+- .NET SDK 8.0 or later
+- A modern web browser
 
 ### Installation
 
 1. Clone the repository:
-
    ```bash
-   git clone [https://github.com/Ammar-Yasser8/compiler.git](https://github.com/Ammar-Yasser8/compiler.git)
+   git clone https://github.com/Ammar-Yasser8/Compiler.git
    ```
 
 2. Navigate to the project folder:
-
    ```bash
-   cd compiler
+   cd Compiler
    ```
 
 3. Run the project:
-
    ```bash
    dotnet run
    ```
 
+4. Open your browser to `http://localhost:5200`
+
 ## 🕹️ Usage
 
-Once the application is running, you can type mathematical expressions directly into the console:
+Enter mathematical expressions in the text area and click **Run Compiler**.
 
-```
-> 10 + 5
-Result: 15
+**Examples:**
 
-> 10 + 5 * 2
-Result: 20  (Note: Multiplication happened first!)
+- Basic Arithmetic: `10 + 5` -> `15`
+- Precedence: `10 + 5 * 2` -> `20`
+- Grouping: `(10 + 5) * 2` -> `30`
+- Complex: `100 / 2 + 50 - (5 * 2)` -> `90`
 
-> (10 + 5) * 2
-Result: 30
-
-> 100 / 2 + 50
-Result: 100
-```
+The result will display the calculated value and the type of the root AST node (e.g., `BinaryExpressionNode`, `NumberNode`).
 
 ## 🔮 Future Roadmap
 
-- [ ] Add support for Variables (e.g., x = 10).
-- [ ] Add support for Floating point numbers (double).
-- [ ] Add power operator (^).
+- [ ] Add support for Variables (e.g., `let x = 10`).
+- [ ] Add support for Floating point numbers.
+- [ ] Implement a history of recent evaluations.
+
 
