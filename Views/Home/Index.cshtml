@@ -1,0 +1,45 @@
+@model Compiler.Models.EvaluationResult
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4">Math Compiler</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card-glass mb-4">
+            <form asp-action="Index" method="post">
+                <div class="form-group mb-4">
+                    <label for="code" class="form-label text-muted mb-2">Expression</label>
+                    <textarea name="code" id="code" class="form-control code-input" rows="3" placeholder="e.g. (10 + 5) * 2 - 4 / 2">@Model.Input</textarea>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Run Compiler
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        @if (Model.Success)
+        {
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <div class="flex-grow-1">
+                    <h5 class="alert-heading mb-1">Result</h5>
+                    <p class="mb-0 display-6 font-monospace">@Model.Output</p>
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Model.Error))
+        {
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>
+                    <h5 class="alert-heading mb-1">Error</h5>
+                    <p class="mb-0">@Model.Error</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -44,7 +44,7 @@ namespace Compiler
                 else if (Current == ')') { tokens.Add(new Token(TokenType.RParen, ")")); Next(); }
                 else
                 {
-                    throw new Exception($"Unknown character: {Current}");
+                    throw new Exception($"Unknown Character (Lexer doesn't know '{Current}')");
                 }
             }
             tokens.Add(new Token(TokenType.EOF, ""));

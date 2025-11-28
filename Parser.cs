@@ -26,6 +26,13 @@ namespace Compiler
                 _position++;
                 return token;
             }
+
+            if (type == TokenType.RParen)
+                throw new Exception("Missing closing parenthesis");
+
+            if (Current.Type == TokenType.EOF)
+                throw new Exception($"Unexpected End of File (Parser expected {type})");
+
             throw new Exception($"Unexpected token <{Current.Type}>, expected <{type}>");
         }
 
@@ -81,6 +88,9 @@ namespace Compiler
                 Match(TokenType.RParen);
                 return expression;
             }
+
+            if (Current.Type == TokenType.EOF)
+                throw new Exception("Unexpected End of File (Parser expected a number)");
 
             throw new Exception($"Unexpected token: {Current.Type}");
         }
